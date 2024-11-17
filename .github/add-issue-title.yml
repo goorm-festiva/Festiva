@@ -1,0 +1,35 @@
+name: Add Issue Title to PR
+
+on:
+  pull_request:
+    types: [opened, edited]
+
+jobs:
+  add-issue-title:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check for Issue Reference
+        uses: actions/github-script@v6
+        with:
+          script: |
+            const issuePattern = /#(\d+)/;
+            const prBody = context.payload.pull_request.body || '';
+            const match = prBody.match(issuePattern);
+
+            if (match) {
+              const issueNumber = match[1];
+              const issue = await github.rest.issues.get({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: issueNumber,
+              });
+
+              const issueTitle = issue.data.title;
+
+              await github.rest.pulls.update({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                pull_number: context.payload.pull_request.number,
+                body: `${prBody}\n\nLinked Issue: #${issueNumber} - ${issueTitle}`,
+              });
+            }
