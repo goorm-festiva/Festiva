@@ -1,13 +1,16 @@
-import { useState } from "react";
-import "./App.css";
+import { Route, Routes } from "react-router-dom";
+import GlobalStyles from "./Styles/GlobalStyles";
+import Home from "./pages/Home";
 import AllEvent from "./components/AllEvent";
 
 function App() {
-  const [count, setCount] = useState(0);
-
   return (
     <>
-      <AllEvent />
+      <GlobalStyles />
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/AllEvent" element={<AllEvent />} />
+      </Routes>
     </>
   );
 }
