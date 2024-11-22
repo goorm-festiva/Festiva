@@ -14,7 +14,7 @@ const Nav = () => {
       </NavDiv>
       <IconDiv>
         <SearchBar />
-        <LinkItem to={"/"}>
+        <LinkItem to={"/Login"}>
           <FaUserCircle size="24" />
         </LinkItem>
       </IconDiv>
