@@ -4,7 +4,7 @@ import Nav from "./Nav";
 import EventList from "./EventList";
 import FilterComponent from "./FilterComponent";
 import AllEventNav from "./AllEventNav";
-import { useFestivalStore } from "../store/useFestivalStore";
+import { useFestivalStore } from "../store/festivalStore";
 
 const AllEvent = () => {
   const { festivalData, isLoading, fetchFestivalData, setFilteredEvents } =
