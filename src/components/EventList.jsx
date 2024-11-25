@@ -1,6 +1,6 @@
 // src/components/EventList.js
 import React from "react";
-import { useFestivalStore } from "../store/useFestivalStore";
+import { useFestivalStore } from "../store/festivalStore";
 
 const EventList = () => {
   const { filteredEvents } = useFestivalStore(); // Zustand 스토어에서 필터링된 이벤트 가져오기
