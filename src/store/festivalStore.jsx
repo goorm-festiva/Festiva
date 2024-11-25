@@ -10,11 +10,24 @@ export const useFestivalStore = create((set) => ({
       const apiKey = import.meta.env.VITE_APP_FESTIVAL_API_KEY;
       const url = `http://openapi.seoul.go.kr:8088/${apiKey}/json/culturalEventInfo/${start}/${end}/${category}`;
       const { data } = await axios.get(url);
-      set({ festivalData: data["culturalEventInfo"]["row"] }); // 필요한 데이터만 저장
+
+      // API 응답을 로그로 출력
+      console.log(data); // 여기서 API 응답을 확인합니다.
+
+      // 데이터 구조를 안전하게 확인하고 설정
+      if (data && data.culturalEventInfo && data.culturalEventInfo.row) {
+        set({ festivalData: data.culturalEventInfo.row });
+      } else {
+        console.error("예상치 못한 API 응답 구조:", data);
+        set({ festivalData: [] }); // 빈 배열로 설정
+      }
     } catch (error) {
-      console.error("Error fetching festival data:", error);
+      console.error("축제 데이터를 가져오는 중 오류 발생:", error);
+      set({ festivalData: [] }); // 오류 처리
     } finally {
       set({ isLoading: false });
     }
   },
+  setFilteredEvents: (events) => set({ filteredEvents: events }), // 필터링된 이벤트 설정
+
 }));

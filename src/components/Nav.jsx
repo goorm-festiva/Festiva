@@ -8,7 +8,7 @@ const Nav = () => {
     <Header>
       <TitleLink to={"/"}>Festiva</TitleLink>
       <NavDiv>
-        <LinkItem to={"/"}>행사 보기</LinkItem>
+        <LinkItem to={"/AllEvent"}>행사 보기</LinkItem>
         <LinkItem to={"/"}>가이드</LinkItem>
         <LinkItem to={"/"}>하이라이트</LinkItem>
       </NavDiv>
