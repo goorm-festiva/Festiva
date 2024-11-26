@@ -20,6 +20,9 @@ const FeaturedEvent = ({ firstData }) => {
           </ViewAllEvent>
         </InfoBox>
         <ImgBox>
+          <AdBadge>
+            <p>AD</p>
+          </AdBadge>
           <img src={firstData.MAIN_IMG} alt={firstData.TITLE} />
         </ImgBox>
       </Event>
@@ -71,11 +74,28 @@ const ImgBox = styled.div`
   height: 352px;
   border: 2px solid #000;
   margin: -2px -2px 0px 0px;
+  position: relative;
 
   img {
     width: 100%;
     height: 100%;
     object-fit: cover;
+  }
+`;
+
+const AdBadge = styled.div`
+  position: absolute;
+  width: 50px;
+  height: 50px;
+  top: 0;
+  right: 0;
+  background-color: #000;
+
+  p {
+    color: #fff;
+    text-align: center;
+    line-height: 50px;
+    font-weight: bold;
   }
 `;
 
