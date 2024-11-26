@@ -29,4 +29,5 @@ export const useFestivalStore = create((set) => ({
     }
   },
   setFilteredEvents: (events) => set({ filteredEvents: events }), // 필터링된 이벤트 설정
+
 }));
