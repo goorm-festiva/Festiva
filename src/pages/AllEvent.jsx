@@ -1,9 +1,9 @@
 // src/components/AllEvent.js
 import React, { useEffect } from "react";
-import Nav from "./Nav";
-import EventList from "./EventList";
-import FilterComponent from "./FilterComponent";
-import AllEventNav from "./AllEventNav";
+import Nav from "../components/Nav";
+import EventList from "../components/EventList";
+import FilterComponent from "../components/FilterComponent";
+import AllEventNav from "../components/AllEventNav";
 import { useFestivalStore } from "../store/festivalStore";
 
 const AllEvent = () => {

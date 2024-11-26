@@ -1,7 +1,7 @@
 import { Route, Routes } from "react-router-dom";
 import GlobalStyles from "./Styles/GlobalStyles";
 import Home from "./pages/Home";
-import AllEvent from "./components/AllEvent";
+import AllEvent from "./pages/AllEvent";
 
 function App() {
   return (
