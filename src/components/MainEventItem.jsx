@@ -5,6 +5,13 @@ const MainEventItem = ({ data }) => {
 
   const { CODENAME, DATE, TITLE, MAIN_IMG } = data;
 
+  //날짜 포맷 변경
+  const dateFormatter = (DATE) => {
+    if (!DATE) return "Invalid Date"; // DATE가 없을 경우 처리
+    const newDate = DATE.replaceAll("-", ".").replaceAll("~", " ~ ");
+    return newDate;
+  };
+
   return (
     <EventCard>
       <ImgBox>
@@ -13,7 +20,7 @@ const MainEventItem = ({ data }) => {
       <ContentsBox>
         <Tag>{CODENAME}</Tag>
         <Title>{TITLE}</Title>
-        <Date>{DATE}</Date>
+        <Date>{dateFormatter(DATE)}</Date>
       </ContentsBox>
     </EventCard>
   );
