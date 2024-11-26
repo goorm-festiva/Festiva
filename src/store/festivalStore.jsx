@@ -8,7 +8,7 @@ export const useFestivalStore = create((set) => ({
   isLoading: true,
   fetchFestivalData: async (category, start = 1, end = 300) => {
     try {
-      const apiKey = import.meta.env.VITE_APP_apiKey;
+      const apiKey = import.meta.env.VITE_APP_FESTIVAL_API_KEY;
       const url = `http://openapi.seoul.go.kr:8088/${apiKey}/json/culturalEventInfo/${start}/${end}/${category}`;
       const { data } = await axios.get(url);
 
