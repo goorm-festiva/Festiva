@@ -1,8 +1,10 @@
 import MainEventItem from "./MainEventItem";
 import { IoIosCalendar } from "react-icons/io";
+import { RxArrowTopRight } from "react-icons/rx";
 import { useFestivalStore } from "../store/festivalStore";
 import { useEffect } from "react";
 import styled from "styled-components";
+import { Link } from "react-router-dom";
 
 const MainEvent = () => {
   const { festivalData, isLoading, fetchFestivalData } = useFestivalStore();
@@ -25,12 +27,15 @@ const MainEvent = () => {
         <FeaturedEvent>
           <InfoBox>
             <h3>진행 중인 이벤트</h3>
-            <div>
+            <ViewAllEvent to="/AllEvent">
               <span>
                 <IoIosCalendar size={24} />
               </span>
-              <p>View All Events</p>
-            </div>
+              <p>
+                View All Events
+                <RxArrowTopRight size={13} style={{ marginLeft: "2px" }} />
+              </p>
+            </ViewAllEvent>
           </InfoBox>
           <ImgBox>
             <img src={firstData.MAIN_IMG} alt={firstData.TITLE} />
@@ -73,12 +78,22 @@ const InfoBox = styled.div`
   h3 {
     font-size: 35px;
   }
+`;
 
-  div {
-    display: flex;
-    align-items: center;
-    span {
-      margin-right: 5px;
+const ViewAllEvent = styled(Link)`
+  display: flex;
+  color: #000;
+  text-decoration: none;
+  align-items: center;
+
+  p {
+    margin: 0 5px;
+  }
+
+  &:hover {
+    p {
+      border-bottom: 1px solid #000;
+      margin-bottom: -1px;
     }
   }
 `;
