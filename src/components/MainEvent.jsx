@@ -1,4 +1,5 @@
 import MainEventItem from "./MainEventItem";
+import { IoIosCalendar } from "react-icons/io";
 import { useFestivalStore } from "../store/festivalStore";
 import { useEffect } from "react";
 import styled from "styled-components";
@@ -16,9 +17,27 @@ const MainEvent = () => {
     return <div>로딩중입니다...</div>;
   }
 
+  const [firstData, ...remainingData] = festivalData;
+
   return (
     <Container>
-      {festivalData.map((data, index) => (
+      <FeaturedEventWrap>
+        <FeaturedEvent>
+          <InfoBox>
+            <h3>진행 중인 이벤트</h3>
+            <div>
+              <span>
+                <IoIosCalendar size={24} />
+              </span>
+              <p>View All Events</p>
+            </div>
+          </InfoBox>
+          <ImgBox>
+            <img src={firstData.MAIN_IMG} alt={firstData.TITLE} />
+          </ImgBox>
+        </FeaturedEvent>
+      </FeaturedEventWrap>
+      {remainingData.map((data, index) => (
         <MainEventItem key={index} data={data} />
       ))}
     </Container>
@@ -32,6 +51,48 @@ const Container = styled.div`
   margin: 0 auto;
   padding: 20px 50px;
   max-width: 1200px;
+`;
+
+const FeaturedEventWrap = styled.div`
+  display: grid;
+  grid-column: 1 / 4;
+`;
+
+const FeaturedEvent = styled.div`
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+`;
+
+const InfoBox = styled.div`
+  grid-column: 1 / 3;
+  display: flex;
+  flex-flow: column wrap;
+  justify-content: space-between;
+  padding-bottom: 50px;
+
+  h3 {
+    font-size: 35px;
+  }
+
+  div {
+    display: flex;
+    align-items: center;
+    span {
+      margin-right: 5px;
+    }
+  }
+`;
+
+const ImgBox = styled.div`
+  height: 352px;
+  border: 2px solid #000;
+  margin: -2px -2px 0px 0px;
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
 `;
 
 export default MainEvent;
