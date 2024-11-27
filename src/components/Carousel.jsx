@@ -8,7 +8,7 @@ import styled from "styled-components";
 const Carousel = () => {
   return (
     <Container>
-      <DefaultSwiper
+      <StyledSwiper
         modules={[Pagination, Autoplay]}
         slidesPerView={1}
         spaceBetween={30}
@@ -28,7 +28,7 @@ const Carousel = () => {
         <SwiperSlide>Slide 3</SwiperSlide>
         <SwiperSlide>Slide 4</SwiperSlide>
         <SwiperSlide>Slide 5</SwiperSlide>
-      </DefaultSwiper>
+      </StyledSwiper>
     </Container>
   );
 };
@@ -60,4 +60,13 @@ const DefaultSwiper = styled(Swiper)`
   }
 `;
 
+const StyledSwiper = styled(DefaultSwiper)`
+  .swiper-pagination-bullet {
+    background-color: #333;
+  }
+
+  .swiper-pagination-bullet-active {
+    background-color: #000;
+  }
+`;
 export default Carousel;
