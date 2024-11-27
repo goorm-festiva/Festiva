@@ -8,7 +8,7 @@ import styled from "styled-components";
 const Carousel = () => {
   return (
     <Container>
-      <StyledSwiper
+      <DefaultSwiper
         modules={[Pagination, Autoplay]}
         slidesPerView={1}
         spaceBetween={30}
@@ -28,11 +28,10 @@ const Carousel = () => {
         <SwiperSlide>Slide 3</SwiperSlide>
         <SwiperSlide>Slide 4</SwiperSlide>
         <SwiperSlide>Slide 5</SwiperSlide>
-      </StyledSwiper>
+      </DefaultSwiper>
     </Container>
   );
 };
-
 const Container = styled.div`
   height: 500px;
   padding: 50px 0;
@@ -58,16 +57,6 @@ const DefaultSwiper = styled(Swiper)`
     width: 100%;
     height: 100%;
     object-fit: cover;
-  }
-`;
-
-const StyledSwiper = styled(DefaultSwiper)`
-  .swiper-pagination-bullet {
-    background-color: #333;
-  }
-
-  .swiper-pagination-bullet-active {
-    background-color: #000;
   }
 `;
 
