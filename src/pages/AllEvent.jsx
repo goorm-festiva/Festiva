@@ -4,11 +4,15 @@ import EventList from "../components/EventList";
 import FilterComponent from "../components/FilterComponent";
 import AllEventNav from "../components/AllEventNav";
 import { useFestivalStore } from "../store/festivalStore";
+import { useLocation } from "react-router-dom";
 
 const AllEvent = () => {
   const { festivalData, isLoading, fetchFestivalData, setFilteredEvents } =
     useFestivalStore();
-  const [searchTerm, setSearchTerm] = useState("");
+
+  const location = useLocation();
+  const inputValue = location.state?.inputValue || "";
+  const [searchTerm, setSearchTerm] = useState(inputValue);
 
   useEffect(() => {
     fetchFestivalData("축제");
@@ -62,6 +66,7 @@ const AllEvent = () => {
       <FilterComponent
         onDateChange={handleDateChange}
         onSearchChange={handleSearchChange}
+        searchTerm={searchTerm}
       />
       <EventList />
     </div>
