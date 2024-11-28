@@ -1,22 +1,10 @@
 import MainEventItem from "./MainEventItem";
-import { useFestivalStore } from "../store/festivalStore";
-import { useEffect } from "react";
 import styled from "styled-components";
 import FeaturedEvent from "./FeaturedEvent";
+import { useFestivalStore } from "../store/festivalStore";
 
 const MainEvent = () => {
-  const { festivalData, isLoading, fetchFestivalData } = useFestivalStore();
-
-  //데이터 패치
-  useEffect(() => {
-    fetchFestivalData("축제", 1, 10);
-  }, [fetchFestivalData]);
-
-  //isLoading: 이미지를 불러오기 전에는 map이 실행되지 않도록 함
-  if (isLoading) {
-    return <div>로딩중입니다...</div>;
-  }
-
+  const { festivalData } = useFestivalStore();
   const [firstData, ...remainingData] = festivalData;
 
   return (
