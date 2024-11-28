@@ -1,13 +1,28 @@
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Pagination, Autoplay } from "swiper/modules";
-
+import { useFestivalStore } from "../store/festivalStore";
+import { useState } from "react";
+import styled from "styled-components";
 import "swiper/css";
 import "swiper/css/pagination";
-import styled from "styled-components";
 
 const Carousel = () => {
+  const { festivalData } = useFestivalStore();
+  const swiperData = festivalData.slice(3, 8);
+  const [info, setInfo] = useState(swiperData[0]);
+
+  const activeEventInfo = (swiper) => {
+    console.log(swiper.realIndex);
+    setInfo(swiperData[swiper.realIndex]);
+  };
+
   return (
     <Container>
+      <FestivalInfo>
+        <h1>{info.TITLE}</h1>
+        <p>{info.DATE}</p>
+        <p>{info.PLACE}</p>
+      </FestivalInfo>
       <StyledSwiper
         modules={[Pagination, Autoplay]}
         slidesPerView={1}
@@ -21,13 +36,14 @@ const Carousel = () => {
           disableOnInteraction: false,
         }}
         speed={800}
+        onSlideChange={activeEventInfo}
         className="mySwiper"
       >
-        <SwiperSlide>Slide 1</SwiperSlide>
-        <SwiperSlide>Slide 2</SwiperSlide>
-        <SwiperSlide>Slide 3</SwiperSlide>
-        <SwiperSlide>Slide 4</SwiperSlide>
-        <SwiperSlide>Slide 5</SwiperSlide>
+        {swiperData.map(({ MAIN_IMG, TITLE }, index) => (
+          <SwiperSlide key={index}>
+            <img src={MAIN_IMG} alt={TITLE} />
+          </SwiperSlide>
+        ))}
       </StyledSwiper>
     </Container>
   );
@@ -36,6 +52,8 @@ const Container = styled.div`
   height: 500px;
   padding: 50px 0;
 `;
+
+const FestivalInfo = styled.div``;
 
 // Swiper 기본 스타일
 const DefaultSwiper = styled(Swiper)`
