@@ -4,7 +4,11 @@ import { useForm } from "react-hook-form";
 import Nav from "../components/Nav";
 
 export default function ReservationPage() {
-  const { register, errors, handleSubmit } = useForm();
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
 
   const onSubmit = (data) => {
     console.log(data);
@@ -32,7 +36,15 @@ export default function ReservationPage() {
         </FormContainer>
         <FormContainer>
           <Label>인원 수를 입력해주세요.</Label>
-          <Input {...register("cnt")} />
+          <Select {...register("cnt", { required: true })}>
+            <option value="">인원 수 선택</option>
+            {Array.from({ length: 10 }, (_, i) => (
+              <option key={i + 1} value={i + 1}>
+                {i + 1}명
+              </option>
+            ))}
+          </Select>
+          {errors.cnt && <ErrorText>인원 수를 선택해주세요.</ErrorText>}
         </FormContainer>
         <Btn>예약하기</Btn>
       </Form>
@@ -68,7 +80,34 @@ const Input = styled.input`
   border: 1px solid lightgray;
   &:focus {
     border: 1px solid #141415;
+    box-shadow: 0px 0px 2px #141415;
   }
+`;
+
+const Select = styled.select`
+  height: 52px;
+  width: 40%;
+  margin-left: 40px;
+  margin-top: 8px;
+  margin-bottom: 40px;
+  padding-left: 8px;
+  font-size: 14px;
+  border-radius: 12px;
+  border: 1px solid lightgray;
+  outline: none;
+  background-color: #ffffff;
+  appearance: none;
+  &:focus {
+    border: 1px solid #141415;
+    box-shadow: 0px 0px 2px #141415;
+  }
+`;
+
+const ErrorText = styled.span`
+  color: red;
+  font-size: 12px;
+  margin-left: 40px;
+  margin-top: -30px;
 `;
 
 const Btn = styled.button`
