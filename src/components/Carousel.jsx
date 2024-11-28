@@ -1,11 +1,14 @@
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Pagination, Autoplay } from "swiper/modules";
-
+import { useFestivalStore } from "../store/festivalStore";
+import styled from "styled-components";
 import "swiper/css";
 import "swiper/css/pagination";
-import styled from "styled-components";
 
 const Carousel = () => {
+  const { festivalData } = useFestivalStore();
+  const swiperData = festivalData.slice(3, 8);
+
   return (
     <Container>
       <StyledSwiper
@@ -23,11 +26,11 @@ const Carousel = () => {
         speed={800}
         className="mySwiper"
       >
-        <SwiperSlide>Slide 1</SwiperSlide>
-        <SwiperSlide>Slide 2</SwiperSlide>
-        <SwiperSlide>Slide 3</SwiperSlide>
-        <SwiperSlide>Slide 4</SwiperSlide>
-        <SwiperSlide>Slide 5</SwiperSlide>
+        {swiperData.map(({ MAIN_IMG, TITLE }, index) => (
+          <SwiperSlide key={index}>
+            <img src={MAIN_IMG} alt={TITLE} />
+          </SwiperSlide>
+        ))}
       </StyledSwiper>
     </Container>
   );
