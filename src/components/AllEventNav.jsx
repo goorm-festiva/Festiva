@@ -13,7 +13,6 @@ const AllEventNav = () => {
 };
 
 const NavWrapper = styled.nav`
-  padding: 10px;
   margin-bottom: 20px;
 `;
 
@@ -21,6 +20,7 @@ const StyledLink = styled(Link)`
   text-decoration: none;
   color: #333;
   margin-right: 5px;
+  font-size: 0.9rem;
 
   &:hover {
     color: #007bff;

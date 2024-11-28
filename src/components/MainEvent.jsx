@@ -17,7 +17,7 @@ const MainEvent = () => {
   );
 };
 
-const Container = styled.div`
+export const Container = styled.div`
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
   grid-auto-rows: 350px;

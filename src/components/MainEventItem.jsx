@@ -24,7 +24,7 @@ const MainEventItem = ({ data }) => {
   );
 };
 
-const EventCard = styled.div`
+export const EventCard = styled.div`
   position: relative;
   border: 2px solid #000000;
   margin: -2px -2px 0px 0px;
@@ -37,7 +37,7 @@ const EventCard = styled.div`
   }
 `;
 
-const ImgBox = styled.div`
+export const ImgBox = styled.div`
   position: absolute;
   top: 0;
   left: 0;
@@ -48,7 +48,7 @@ const ImgBox = styled.div`
   }
 `;
 
-const ContentsBox = styled.div`
+export const ContentsBox = styled.div`
   padding: 30px 20px;
   display: flex;
   flex-flow: column wrap;
