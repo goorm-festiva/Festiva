@@ -1,8 +1,6 @@
 import styled from "styled-components";
 
 const MainEventItem = ({ data }) => {
-  console.log(data);
-
   const { CODENAME, DATE, TITLE, MAIN_IMG } = data;
 
   //날짜 포맷 변경
