@@ -70,7 +70,7 @@ const ViewAllEvent = styled(Link)`
   }
 `;
 
-const ImgBox = styled.div`
+export const ImgBox = styled.div`
   height: 352px;
   border: 2px solid #000;
   margin: -2px -2px 0px 0px;
@@ -83,7 +83,7 @@ const ImgBox = styled.div`
   }
 `;
 
-const AdBadge = styled.div`
+export const AdBadge = styled.div`
   position: absolute;
   width: 50px;
   height: 50px;
