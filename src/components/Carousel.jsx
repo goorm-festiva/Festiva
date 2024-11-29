@@ -1,10 +1,13 @@
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Pagination, Autoplay } from "swiper/modules";
 import { useFestivalStore } from "../store/festivalStore";
+import { GoArrowUpRight } from "react-icons/go";
 import { useState } from "react";
 import styled from "styled-components";
 import "swiper/css";
 import "swiper/css/pagination";
+import { Link } from "react-router-dom";
+import dateFormatter from "../util/dateFormatter";
 
 const Carousel = () => {
   const { festivalData } = useFestivalStore();
@@ -17,58 +20,106 @@ const Carousel = () => {
   };
 
   return (
-    <Container>
-      <FestivalInfo>
-        <h1>{info.TITLE}</h1>
-        <p>{info.DATE}</p>
-        <p>{info.PLACE}</p>
-      </FestivalInfo>
-      <StyledSwiper
-        modules={[Pagination, Autoplay]}
-        slidesPerView={1}
-        spaceBetween={30}
-        loop={true}
-        pagination={{
-          clickable: true,
-        }}
-        autoplay={{
-          delay: 5000,
-          disableOnInteraction: false,
-        }}
-        speed={800}
-        onSlideChange={activeEventInfo}
-        className="mySwiper"
-      >
-        {swiperData.map(({ MAIN_IMG, TITLE }, index) => (
-          <SwiperSlide key={index}>
-            <img src={MAIN_IMG} alt={TITLE} />
-          </SwiperSlide>
-        ))}
-      </StyledSwiper>
-    </Container>
+    <CarouselWrap>
+      <Container>
+        <FestivalInfo>
+          <div>
+            <span>What's On</span>
+            <h1>{info.TITLE}</h1>
+          </div>
+          <div>
+            <p>{dateFormatter(info.DATE)}</p>
+            <p>{info.PLACE}</p>
+          </div>
+          <LinkDetail to="">
+            <GoArrowUpRight size={250} />
+          </LinkDetail>
+        </FestivalInfo>
+        <StyledSwiper
+          modules={[Pagination, Autoplay]}
+          slidesPerView={1}
+          spaceBetween={30}
+          loop={true}
+          pagination={{
+            clickable: true,
+          }}
+          autoplay={{
+            delay: 5000,
+            disableOnInteraction: false,
+          }}
+          speed={800}
+          onSlideChange={activeEventInfo}
+          className="mySwiper"
+        >
+          {swiperData.map(({ MAIN_IMG, TITLE }, index) => (
+            <SwiperSlide key={index}>
+              <img src={MAIN_IMG} alt={TITLE} />
+            </SwiperSlide>
+          ))}
+        </StyledSwiper>
+      </Container>
+    </CarouselWrap>
   );
 };
-const Container = styled.div`
+
+const CarouselWrap = styled.div`
+  width: 100%;
   height: 500px;
-  padding: 50px 0;
+  margin: 50px 0 80px;
 `;
 
-const FestivalInfo = styled.div``;
+const Container = styled.div`
+  width: 90%;
+  height: 100%;
+  margin: 0 auto;
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-between;
+`;
+
+const FestivalInfo = styled.div`
+  width: 60%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  position: relative;
+
+  span {
+    font-size: 1.4rem;
+    font-weight: 800;
+    color: #ed3da6;
+  }
+
+  h1 {
+    font-size: 3.2rem;
+    margin-top: 15px;
+  }
+
+  p:nth-of-type(1) {
+    font-size: 1.25rem;
+    font-weight: 700;
+  }
+
+  p:nth-of-type(2) {
+    font-size: 1.2rem;
+    font-weight: 500;
+    margin-top: 10px;
+  }
+`;
+
+const LinkDetail = styled(Link)`
+  position: absolute;
+  bottom: -4rem;
+  right: 0;
+  color: #000;
+`;
 
 // Swiper 기본 스타일
 const DefaultSwiper = styled(Swiper)`
-  width: 100%;
+  width: 35%;
   height: 100%;
-  margin-left: auto;
-  margin-right: auto;
-
-  .swiper-slide {
-    text-align: center;
-    font-size: 18px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
+  aspect-ratio: 3 / 4; /* 정사각형 비율 유지 */
+  margin: 0;
 
   .swiper-slide img {
     display: block;
