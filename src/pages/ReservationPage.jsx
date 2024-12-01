@@ -54,6 +54,8 @@ export default function ReservationPage() {
 
 const Form = styled.div`
   margin-left: 4%;
+  margin-top: 12%;
+  width: 60%;
 `;
 
 const FormContainer = styled.div`
@@ -69,7 +71,7 @@ const Label = styled.label`
 
 const Input = styled.input`
   height: 52px;
-  width: 40%;
+  width: 80%;
   margin-left: 40px;
   margin-top: 8px;
   margin-bottom: 40px;
@@ -86,7 +88,7 @@ const Input = styled.input`
 
 const Select = styled.select`
   height: 52px;
-  width: 40%;
+  width: 80%;
   margin-left: 40px;
   margin-top: 8px;
   margin-bottom: 40px;
@@ -113,11 +115,12 @@ const ErrorText = styled.span`
 const Btn = styled.button`
   margin-top: 28px;
   margin-left: 40px;
-  width: 40%;
+  width: 80%;
   height: 52px;
   border-radius: 15px;
   font-size: 14px;
   font-weight: 500;
   color: #ffffff;
   background-color: #000000;
+  cursor: pointer;
 `;
