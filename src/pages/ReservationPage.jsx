@@ -62,6 +62,8 @@ export default function ReservationPage() {
         </Form>
         <CalendarWrapper>
           <Calendar date={selectedDate} onChange={handleDateChange} />
+          <Label>예약 날짜</Label>
+          <SelectDate>{selectedDate.toLocaleDateString()}</SelectDate>
         </CalendarWrapper>
       </RsvContainer>
     </>
@@ -72,6 +74,7 @@ const RsvContainer = styled.div`
   display: flex;
   flex-direction: row;
   margin-top: 12%;
+  margin-right: 4%;
 `;
 
 const Form = styled.div`
@@ -133,7 +136,25 @@ const ErrorText = styled.span`
   margin-top: -30px;
 `;
 
-const CalendarWrapper = styled.div``;
+const CalendarWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+`;
+
+const SelectDate = styled.div`
+  margin-top: 12px;
+  margin-left: 32px;
+  padding-left: 8px;
+  width: 80%;
+  height: 52px;
+  border-radius: 15px;
+  border: 1px solid lightgray;
+  font-size: 16px;
+  font-weight: 500;
+  text-align: center;
+  display: flex;
+  align-items: center;
+`;
 
 const Btn = styled.button`
   margin-top: 28px;
