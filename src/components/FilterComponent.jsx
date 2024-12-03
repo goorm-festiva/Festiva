@@ -37,7 +37,7 @@ const FilterComponent = ({ onDateChange, onSearchChange, searchTerm }) => {
         </span>
       </InputContainer>
       <ListFilter>
-        <DateRange
+        <StyledDateRange
           ranges={dateRange}
           onChange={handleSelect}
           editableDateInputs={true}
@@ -79,5 +79,66 @@ const ListFilter = styled.div`
   margin-top: 40px;
   text-color: white;
   border: 2px solid #000;
+  background-color: black;
+`;
+
+const StyledDateRange = styled(DateRange)`
+  .rdrDateRangeWrapper {
+    background-color: black;
+    color: white;
+  }
+
+  .rdrDateDisplayWrapper {
+    background-color: black;
+  }
+
+  .rdrCalendarWrapper {
+    background-color: black !important;
+  }
+
+  .rdrMonthAndYearWrapper {
+    background-color: black !important;
+    color: white;
+  }
+
+  .rdrMonth {
+    background-color: black !important;
+  }
+
+  .rdrDays {
+    background-color: black !important;
+  }
+
+  .rdrDayNumber span {
+    color: white !important;
+  }
+
+  .rdrDay {
+    background-color: black !important;
+  }
+
+  input {
+    background-color: black;
+    // border: 1px solid #333;
+  }
+
+  button {
+    background-color: #333;
+  }
+
+  select {
+    color: white;
+  }
+
+  .rdrPprevButton {
+    i {
+      border-color: transparent white transparent transparent;
+    }
+  }
+  .rdrNextButton {
+    i {
+      border-color: transparent transparent transparent white;
+    }
+  }
 `;
 export default FilterComponent;
