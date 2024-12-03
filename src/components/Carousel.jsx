@@ -1,5 +1,5 @@
 import { useFestivalStore } from "../store/festivalStore";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import styled from "styled-components";
 import FestivalInfo from "./FestivalInfo";
 import StyledSwiper from "./StyledSwiper";
@@ -9,8 +9,14 @@ import "swiper/css/pagination";
 
 const Carousel = () => {
   const { festivalData } = useFestivalStore();
-  const swiperData = festivalData.slice(0, 5);
-  const [info, setInfo] = useState(swiperData[0]);
+  const swiperData = festivalData ? festivalData.slice(0, 5) : [];
+  const [info, setInfo] = useState(swiperData[0] || null);
+
+  useEffect(() => {
+    if (festivalData.length > 0) {
+      setInfo(festivalData[0]);
+    }
+  }, [festivalData]);
 
   const activeEventInfo = (swiper) => {
     setInfo(swiperData[swiper.realIndex]);

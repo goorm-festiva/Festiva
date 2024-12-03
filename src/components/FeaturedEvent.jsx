@@ -4,6 +4,10 @@ import styled from "styled-components";
 import { Link } from "react-router-dom";
 
 const FeaturedEvent = ({ firstData }) => {
+  if (!firstData) {
+    return <div>데이터가 없습니다.</div>;
+  }
+
   return (
     <EventWrap>
       <Event>
