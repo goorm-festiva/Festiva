@@ -5,15 +5,14 @@ import MainEvent from "../components/MainEvent";
 import Nav from "../components/Nav";
 
 const Home = () => {
-  const { isLoading, fetchFestivalData } = useFestivalStore();
+  const { isLoading, fetchFestivalData, festivalData } = useFestivalStore();
 
   //데이터 패치
   useEffect(() => {
     fetchFestivalData("축제", 1, 10);
-  }, []);
+  }, [fetchFestivalData]);
 
-  //isLoading: 이미지를 불러오기 전에는 map이 실행되지 않도록 함
-  if (isLoading) {
+  if (isLoading || !festivalData || festivalData.length === 0) {
     return <div>로딩중입니다...</div>;
   }
 
