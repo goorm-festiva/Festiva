@@ -22,7 +22,11 @@ export default function ReservationPage() {
   };
 
   const onSubmit = (data) => {
-    console.log(data);
+    const rsvData = {
+      ...data,
+      date: selectedDate.toLocaleDateString(),
+    };
+    console.log("Form Data:", rsvData);
   };
 
   return (
@@ -58,7 +62,7 @@ export default function ReservationPage() {
             </Select>
             {errors.cnt && <ErrorText>인원 수를 선택해주세요.</ErrorText>}
           </FormContainer>
-          <Btn>예약하기</Btn>
+          <Btn type="submit">예약하기</Btn>
         </Form>
         <CalendarWrapper>
           <Calendar date={selectedDate} onChange={handleDateChange} />
@@ -77,7 +81,7 @@ const RsvContainer = styled.div`
   margin-right: 4%;
 `;
 
-const Form = styled.div`
+const Form = styled.form`
   margin-left: 4%;
   width: 60%;
 `;
