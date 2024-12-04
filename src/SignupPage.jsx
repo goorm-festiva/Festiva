@@ -54,7 +54,7 @@ const InputContainer = styled.div`
 
 // 입력 필드 스타일
 const Input = styled.input`
-  width: 91%;
+  width: 500px;
   /* 좌우 및 상하 여백 */ 
   padding: 25px 20px; 
 
