@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { FaYoutube, FaInstagram, FaGithub } from "react-icons/fa";
+import { FaArrowUp, FaYoutube, FaInstagram, FaGithub } from "react-icons/fa";
 import { FaXTwitter } from "react-icons/fa6";
 import { RiNotionFill } from "react-icons/ri";
 import { useNavigate } from "react-router-dom";
@@ -35,6 +35,9 @@ export const Footer = () => {
   return (
     <FooterBox>
       <FooterWrap>
+        <ScrollTop>
+          <FaArrowUp onClick={() => handleScrollTop("/")} />
+        </ScrollTop>
         <Nav>
           {textNav.map((menu, index) => {
             return (
@@ -68,6 +71,22 @@ const FooterBox = styled.footer`
   background-color: #000;
   color: #666;
   position: relative;
+`;
+
+const ScrollTop = styled.div`
+  width: 55px;
+  height: 55px;
+  border-radius: 50%;
+  background-color: #000;
+  color: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  right: 40px;
+  top: -70px;
+  font-size: 20px;
+  cursor: pointer;
 `;
 
 const FooterWrap = styled.div`
