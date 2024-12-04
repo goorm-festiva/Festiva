@@ -4,6 +4,10 @@ import styled from "styled-components";
 import { Link } from "react-router-dom";
 
 const FeaturedEvent = ({ firstData }) => {
+  if (!firstData) {
+    return <div>데이터가 없습니다.</div>;
+  }
+
   return (
     <EventWrap>
       <Event>
@@ -37,7 +41,7 @@ const EventWrap = styled.div`
 
 const Event = styled.div`
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(270px, 1fr));
 `;
 
 const InfoBox = styled.div`
