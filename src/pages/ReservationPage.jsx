@@ -7,6 +7,7 @@ import "react-date-range/dist/theme/default.css";
 import Nav from "../components/Nav";
 import { useState } from "react";
 import Label from "../components/FormLabel";
+import Input from "../components/FormInput";
 
 export default function ReservationPage() {
   const [selectedDate, setSelectedDate] = useState(new Date());
@@ -37,18 +38,27 @@ export default function ReservationPage() {
         <Form onSubmit={handleSubmit(onSubmit)}>
           <FormContainer>
             <Label text="예약자 성명을 입력해주세요." />
-            <Input placeholder="festiva@email.com" {...register("name")} />
+            <Input
+              register={register}
+              name="name"
+              placeholder="성명을 입력해주세요."
+            />
           </FormContainer>
           <FormContainer>
             <Label text="전화번호를 입력해주세요" />
-            <Input placeholder="010-0000-0000" {...register("phone")} />
+            <Input
+              register={register}
+              name="phone"
+              placeholder="010-0000-0000"
+            />
           </FormContainer>
           <FormContainer>
             <Label text="이메일을 입력해주세요." />
             <Input
+              register={register}
+              name="email"
               type="email"
-              placeholder="festiva@email.com"
-              {...register("email")}
+              placeholder="example@email.com"
             />
           </FormContainer>
           <FormContainer>
@@ -67,7 +77,7 @@ export default function ReservationPage() {
         </Form>
         <CalendarWrapper>
           <Calendar date={selectedDate} onChange={handleDateChange} />
-          <Label>예약 날짜</Label>
+          <Label text="에약 날짜" />
           <SelectDate>{selectedDate.toLocaleDateString()}</SelectDate>
         </CalendarWrapper>
       </RsvContainer>
@@ -90,23 +100,6 @@ const Form = styled.form`
 const FormContainer = styled.div`
   display: flex;
   flex-direction: column;
-`;
-
-const Input = styled.input`
-  height: 52px;
-  width: 80%;
-  margin-left: 40px;
-  margin-top: 8px;
-  margin-bottom: 40px;
-  padding-left: 8px;
-  font-size: 14px;
-  outline: none;
-  border-radius: 12px;
-  border: 1px solid lightgray;
-  &:focus {
-    border: 1px solid #141415;
-    box-shadow: 0px 0px 2px #141415;
-  }
 `;
 
 const Select = styled.select`
