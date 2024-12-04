@@ -1,17 +1,18 @@
 import styled from "styled-components";
+import dateFormatter from "../util/dateFormatter";
+import { useNavigate } from "react-router-dom";
 
-const MainEventItem = ({ data }) => {
+const MainEventItem = ({ data, id }) => {
   const { CODENAME, DATE, TITLE, MAIN_IMG } = data;
+  const navigate = useNavigate();
 
-  //날짜 포맷 변경
-  const dateFormatter = (DATE) => {
-    if (!DATE) return "Invalid Date"; // DATE가 없을 경우 처리
-    const newDate = DATE.replaceAll("-", ".").replaceAll("~", " ~ ");
-    return newDate;
+  const moveToDetailPage = (id) => {
+    navigate(`/detail/${id}`, { state: data });
+    window.scrollTo({ top: 0, left: 0 });
   };
 
   return (
-    <EventCard>
+    <EventCard onClick={() => moveToDetailPage(id)}>
       <ImgBox>
         <img src={MAIN_IMG} />
       </ImgBox>
@@ -24,7 +25,7 @@ const MainEventItem = ({ data }) => {
   );
 };
 
-const EventCard = styled.div`
+export const EventCard = styled.div`
   position: relative;
   border: 2px solid #000000;
   margin: -2px -2px 0px 0px;
@@ -37,7 +38,7 @@ const EventCard = styled.div`
   }
 `;
 
-const ImgBox = styled.div`
+export const ImgBox = styled.div`
   position: absolute;
   top: 0;
   left: 0;
@@ -48,7 +49,7 @@ const ImgBox = styled.div`
   }
 `;
 
-const ContentsBox = styled.div`
+export const ContentsBox = styled.div`
   padding: 30px 20px;
   display: flex;
   flex-flow: column wrap;
