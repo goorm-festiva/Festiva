@@ -133,6 +133,7 @@ const Icons = styled.div`
     transition: color 0.3s;
 
     &:hover {
+      cursor: pointer;
       color: #fff;
     }
   }
