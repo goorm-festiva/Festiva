@@ -6,6 +6,7 @@ import "react-date-range/dist/styles.css";
 import "react-date-range/dist/theme/default.css";
 import Nav from "../components/Nav";
 import { useState } from "react";
+import Label from "../components/FormLabel";
 
 export default function ReservationPage() {
   const [selectedDate, setSelectedDate] = useState(new Date());
@@ -35,15 +36,15 @@ export default function ReservationPage() {
       <RsvContainer>
         <Form onSubmit={handleSubmit(onSubmit)}>
           <FormContainer>
-            <Label>예약자 성명을 입력해주세요.</Label>
+            <Label text="예약자 성명을 입력해주세요." />
             <Input placeholder="festiva@email.com" {...register("name")} />
           </FormContainer>
           <FormContainer>
-            <Label>전화번호를 입력해주세요.</Label>
+            <Label text="전화번호를 입력해주세요" />
             <Input placeholder="010-0000-0000" {...register("phone")} />
           </FormContainer>
           <FormContainer>
-            <Label>이메일을 입력해주세요.</Label>
+            <Label text="이메일을 입력해주세요." />
             <Input
               type="email"
               placeholder="festiva@email.com"
@@ -51,7 +52,7 @@ export default function ReservationPage() {
             />
           </FormContainer>
           <FormContainer>
-            <Label>인원 수를 입력해주세요.</Label>
+            <Label text="인원 수를 입력해주세요." />
             <Select {...register("cnt", { required: true })}>
               <option value="">인원 수 선택</option>
               {Array.from({ length: 10 }, (_, i) => (
@@ -89,12 +90,6 @@ const Form = styled.form`
 const FormContainer = styled.div`
   display: flex;
   flex-direction: column;
-`;
-
-const Label = styled.label`
-  font-size: 16px;
-  font-weight: 400;
-  margin-left: 32px;
 `;
 
 const Input = styled.input`
