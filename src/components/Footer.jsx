@@ -2,8 +2,16 @@ import styled from "styled-components";
 import { FaYoutube, FaInstagram, FaGithub } from "react-icons/fa";
 import { FaXTwitter } from "react-icons/fa6";
 import { RiNotionFill } from "react-icons/ri";
+import { useNavigate } from "react-router-dom";
 
 export const Footer = () => {
+  const navigate = useNavigate();
+
+  const handleScrollTop = (path) => {
+    navigate(path);
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
+
   const textNav = [
     "About",
     "Blog",
@@ -28,18 +36,19 @@ export const Footer = () => {
     <FooterBox>
       <FooterWrap>
         <Nav>
-          <p>About</p>
-          <p>Blog</p>
-          <p>Schedule</p>
-          <p>Information</p>
-          <p>Safety Management</p>
-          <p>Contact</p>
+          {textNav.map((menu, index) => {
+            return (
+              <p key={index} onClick={() => handleScrollTop("/AllEvent")}>
+                {menu}
+              </p>
+            );
+          })}
         </Nav>
         <Icons>
           {iconNav.map((icon, index) => {
             const IconComponent = icon.name;
             return (
-              <a href={icon.link} key={index} target="_blank">
+              <a to={icon.link} key={index} target="_blank">
                 <IconComponent />
               </a>
             );
