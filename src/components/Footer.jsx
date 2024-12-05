@@ -2,10 +2,11 @@ import styled from "styled-components";
 import { FaArrowUp, FaYoutube, FaInstagram, FaGithub } from "react-icons/fa";
 import { FaXTwitter } from "react-icons/fa6";
 import { RiNotionFill } from "react-icons/ri";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 
 export const Footer = () => {
   const navigate = useNavigate();
+  const { pathname } = useLocation();
 
   const handleScrollTop = (path) => {
     navigate(path);
@@ -36,7 +37,7 @@ export const Footer = () => {
     <FooterBox>
       <FooterWrap>
         <ScrollTop>
-          <FaArrowUp onClick={() => handleScrollTop("/")} />
+          <FaArrowUp onClick={() => handleScrollTop(pathname)} />
         </ScrollTop>
         <Nav>
           {textNav.map((menu, index) => {
@@ -51,7 +52,7 @@ export const Footer = () => {
           {iconNav.map((icon, index) => {
             const IconComponent = icon.name;
             return (
-              <a to={icon.link} key={index} target="_blank">
+              <a href={icon.link} key={index} target="_blank">
                 <IconComponent />
               </a>
             );
