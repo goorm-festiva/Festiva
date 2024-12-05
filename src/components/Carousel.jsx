@@ -11,15 +11,19 @@ const Carousel = () => {
   const { festivalData } = useFestivalStore();
   const swiperData = festivalData ? festivalData.slice(0, 5) : [];
   const [info, setInfo] = useState(swiperData[0] || null);
+  const [currentIndex, setCurrentIndex] = useState(0);
 
   useEffect(() => {
     if (festivalData.length > 0) {
       setInfo(festivalData[0]);
+      setCurrentIndex(0);
     }
   }, [festivalData]);
 
   const activeEventInfo = (swiper) => {
-    setInfo(swiperData[swiper.realIndex]);
+    let index = swiper.realIndex;
+    setInfo(swiperData[index]);
+    setCurrentIndex(index);
   };
 
   if (!festivalData || festivalData.length === 0) {
@@ -29,7 +33,7 @@ const Carousel = () => {
   return (
     <CarouselWrap>
       <Container>
-        <FestivalInfo info={info} />
+        <FestivalInfo info={info} index={currentIndex} />
         <StyledSwiper
           activeEventInfo={activeEventInfo}
           swiperData={swiperData}
