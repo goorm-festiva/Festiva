@@ -1,9 +1,20 @@
 import { IoIosCalendar } from "react-icons/io";
 import { RxArrowTopRight } from "react-icons/rx";
 import styled from "styled-components";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const FeaturedEvent = ({ firstData }) => {
+  const navigate = useNavigate();
+
+  if (!firstData) {
+    return <div>데이터가 없습니다.</div>;
+  }
+
+  const moveToFirstDetailPage = () => {
+    navigate(`/detail/${0}`, { state: firstData });
+    window.scrollTo({ top: 0, left: 0 });
+  };
+
   return (
     <EventWrap>
       <Event>
@@ -19,7 +30,7 @@ const FeaturedEvent = ({ firstData }) => {
             </p>
           </ViewAllEvent>
         </InfoBox>
-        <ImgBox>
+        <ImgBox onClick={() => moveToFirstDetailPage()}>
           <AdBadge>
             <p>AD</p>
           </AdBadge>
@@ -37,7 +48,7 @@ const EventWrap = styled.div`
 
 const Event = styled.div`
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(270px, 1fr));
 `;
 
 const InfoBox = styled.div`
@@ -75,6 +86,7 @@ export const ImgBox = styled.div`
   border: 2px solid #000;
   margin: -2px -2px 0px 0px;
   position: relative;
+  cursor: pointer;
 
   img {
     width: 100%;

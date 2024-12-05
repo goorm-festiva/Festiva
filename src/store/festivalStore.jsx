@@ -21,7 +21,11 @@ export const useFestivalStore = create((set) => ({
       console.log(data); // 여기서 API 응답을 확인합니다.
 
       // 데이터 구조를 안전하게 확인하고 설정
-      if (data && data.culturalEventInfo && data.culturalEventInfo.row) {
+      if (
+        data &&
+        data.culturalEventInfo &&
+        Array.isArray(data.culturalEventInfo.row)
+      ) {
         const fetchedData = data.culturalEventInfo.row;
         set((state) => ({
           festivalData:
@@ -34,11 +38,11 @@ export const useFestivalStore = create((set) => ({
           currentPage: page,
         }));
       } else {
-        console.error("예상치 못한 API 응답 구조:", data);
+        console.error("culturalEventInfo가 응답에 없습니다:", data);
         set({ festivalData: [], filteredEvents: [] }); // 빈 배열로 설정
       }
     } catch (error) {
-      console.error("축제 데이터를 가져오는 중 오류 발생:", error);
+      console.error("축제 데이터를 가져오는 중 오류 발생:", error.message);
       set({ festivalData: [], filteredEvents: [] }); // 오류 처리
     } finally {
       set({ isLoading: false });

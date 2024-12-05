@@ -1,17 +1,18 @@
 import styled from "styled-components";
+import dateFormatter from "../util/dateFormatter";
+import { useNavigate } from "react-router-dom";
 
-const MainEventItem = ({ data }) => {
+const MainEventItem = ({ data, id }) => {
   const { CODENAME, DATE, TITLE, MAIN_IMG } = data;
+  const navigate = useNavigate();
 
-  //날짜 포맷 변경
-  const dateFormatter = (DATE) => {
-    if (!DATE) return "Invalid Date"; // DATE가 없을 경우 처리
-    const newDate = DATE.replaceAll("-", ".").replaceAll("~", " ~ ");
-    return newDate;
+  const moveToDetailPage = (id) => {
+    navigate(`/detail/${id}`, { state: data });
+    window.scrollTo({ top: 0, left: 0 });
   };
 
   return (
-    <EventCard>
+    <EventCard onClick={() => moveToDetailPage(id)}>
       <ImgBox>
         <img src={MAIN_IMG} />
       </ImgBox>

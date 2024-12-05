@@ -1,72 +1,66 @@
-import { Swiper, SwiperSlide } from "swiper/react";
-import { Pagination, Autoplay } from "swiper/modules";
+import { useFestivalStore } from "../store/festivalStore";
+import { useState, useEffect } from "react";
+import styled from "styled-components";
+import FestivalInfo from "./FestivalInfo";
+import StyledSwiper from "./StyledSwiper";
 
 import "swiper/css";
 import "swiper/css/pagination";
-import styled from "styled-components";
 
 const Carousel = () => {
+  const { festivalData } = useFestivalStore();
+  const swiperData = festivalData ? festivalData.slice(0, 5) : [];
+  const [info, setInfo] = useState(swiperData[0] || null);
+
+  useEffect(() => {
+    if (festivalData.length > 0) {
+      setInfo(festivalData[0]);
+    }
+  }, [festivalData]);
+
+  const activeEventInfo = (swiper) => {
+    setInfo(swiperData[swiper.realIndex]);
+  };
+
+  if (!festivalData || festivalData.length === 0) {
+    return <div>데이터가 없습니다.</div>;
+  }
+
   return (
-    <Container>
-      <StyledSwiper
-        modules={[Pagination, Autoplay]}
-        slidesPerView={1}
-        spaceBetween={30}
-        loop={true}
-        pagination={{
-          clickable: true,
-        }}
-        autoplay={{
-          delay: 5000,
-          disableOnInteraction: false,
-        }}
-        speed={800}
-        className="mySwiper"
-      >
-        <SwiperSlide>Slide 1</SwiperSlide>
-        <SwiperSlide>Slide 2</SwiperSlide>
-        <SwiperSlide>Slide 3</SwiperSlide>
-        <SwiperSlide>Slide 4</SwiperSlide>
-        <SwiperSlide>Slide 5</SwiperSlide>
-      </StyledSwiper>
-    </Container>
+    <CarouselWrap>
+      <Container>
+        <FestivalInfo info={info} />
+        <StyledSwiper
+          activeEventInfo={activeEventInfo}
+          swiperData={swiperData}
+        />
+      </Container>
+    </CarouselWrap>
   );
 };
-const Container = styled.div`
-  height: 500px;
-  padding: 50px 0;
-`;
 
-// Swiper 기본 스타일
-const DefaultSwiper = styled(Swiper)`
+const CarouselWrap = styled.div`
   width: 100%;
-  height: 100%;
-  margin-left: auto;
-  margin-right: auto;
-
-  .swiper-slide {
-    text-align: center;
-    font-size: 18px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-
-  .swiper-slide img {
-    display: block;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-  }
+  padding-top: 4.188rem;
+  padding-bottom: 7rem;
 `;
 
-const StyledSwiper = styled(DefaultSwiper)`
+const Container = styled.div`
+  width: clamp(850px, 100%, 1400px);
+  padding: 0 50px;
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-between;
+  margin: 0 auto;
+
   .swiper-pagination-bullet {
     background-color: #333;
+    margin: 0 5px;
   }
 
   .swiper-pagination-bullet-active {
     background-color: #000;
   }
 `;
+
 export default Carousel;
