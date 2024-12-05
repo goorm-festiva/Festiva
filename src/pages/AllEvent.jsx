@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import Nav from "../components/Nav";
 import EventList from "../components/EventList";
 import FilterComponent from "../components/FilterComponent";
 import AllEventNav from "../components/AllEventNav";
@@ -61,7 +60,6 @@ const AllEvent = () => {
 
   return (
     <>
-      <Nav />
       <Head>
         <AllEventNav />
         <h1>축제 일정</h1>
