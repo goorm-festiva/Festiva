@@ -1,4 +1,3 @@
-import React, { useEffect, useState } from "react";
 import React, { useCallback, useEffect, useRef, useState } from "react";
 import EventList from "../components/EventList";
 import FilterComponent from "../components/FilterComponent";
