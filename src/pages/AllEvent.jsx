@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useRef, useState } from "react";
 import Nav from "../components/Nav";
 import EventList from "../components/EventList";
 import FilterComponent from "../components/FilterComponent";
@@ -14,6 +14,28 @@ const AllEvent = () => {
   const location = useLocation();
   const inputValue = location.state?.inputValue || "";
   const [searchTerm, setSearchTerm] = useState(inputValue);
+
+  const [page, setPage] = useState(1);
+  const [hasMore, setHasMore] = useState(true);
+  const observer = useRef();
+
+  const lastEventElementRef = useCallback(
+    (node) => {
+      if (isLoading) return;
+      if (observer.current) observer.current.disconnect();
+      observer.current = new IntersectionObserver((entries) => {
+        if (entries[0].isIntersecting && hasMore) {
+          setPage((prevPage) => prevPage + 1);
+        }
+      });
+      if (node) observer.current.observe(node);
+    },
+    [isLoading, hasMore]
+  );
+
+  useEffect(() => {
+    fetchFestivalData("축제", page);
+  }, [fetchFestivalData, page]);
 
   useEffect(() => {
     fetchFestivalData("축제");
@@ -72,7 +94,11 @@ const AllEvent = () => {
           onSearchChange={handleSearchChange}
           searchTerm={searchTerm}
         />
-        <EventList />
+        <EventList
+          events={festivalData}
+          lastEventElementRef={lastEventElementRef}
+        />
+        {isLoading && <div>로딩 중...</div>}
       </Container>
     </>
   );
