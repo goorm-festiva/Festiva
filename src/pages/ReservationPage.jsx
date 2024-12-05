@@ -4,7 +4,6 @@ import { useForm } from "react-hook-form";
 import { Calendar } from "react-date-range";
 import "react-date-range/dist/styles.css";
 import "react-date-range/dist/theme/default.css";
-import Nav from "../components/Nav";
 import { useState } from "react";
 import Label from "../components/FormLabel";
 import Input from "../components/FormInput";
@@ -33,7 +32,6 @@ export default function ReservationPage() {
 
   return (
     <>
-      <Nav />
       <RsvContainer>
         <Form onSubmit={handleSubmit(onSubmit)}>
           <FormContainer>
