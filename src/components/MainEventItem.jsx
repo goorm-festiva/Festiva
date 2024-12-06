@@ -1,15 +1,10 @@
 import styled from "styled-components";
 import dateFormatter from "../util/dateFormatter";
-import { useNavigate } from "react-router-dom";
+import { useNavigateToDetail } from "../hooks/useNavigateToDetail";
 
 const MainEventItem = ({ data, id }) => {
   const { CODENAME, DATE, TITLE, MAIN_IMG } = data;
-  const navigate = useNavigate();
-
-  const moveToDetailPage = (id) => {
-    navigate(`/detail/${id}`, { state: data });
-    window.scrollTo({ top: 0, left: 0 });
-  };
+  const moveToDetailPage = useNavigateToDetail();
 
   return (
     <EventCard onClick={() => moveToDetailPage(id)}>
