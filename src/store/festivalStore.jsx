@@ -49,5 +49,31 @@ export const useFestivalStore = create((set) => ({
     }
   },
 
-  setFilteredEvents: (events) => set({ filteredEvents: events }), // 필터링된 이벤트 설정
+  setFilteredEvents: (events) => set({ filteredEvents: events }), // 필터링된 이벤트 설정4
+  fetchAllFestivalData: async (category) => {
+    try {
+      const apiKey = import.meta.env.VITE_APP_FESTIVAL_API_KEY;
+      const url = `http://openapi.seoul.go.kr:8088/${apiKey}/json/culturalEventInfo/1/1000/${category}`;
+      const { data } = await axios.get(url);
+
+      if (
+        data &&
+        data.culturalEventInfo &&
+        Array.isArray(data.culturalEventInfo.row)
+      ) {
+        set({
+          festivalData: data.culturalEventInfo.row,
+          filteredEvents: data.culturalEventInfo.row,
+        });
+      } else {
+        console.error("culturalEventInfo가 응답에 없습니다:", data);
+        set({ festivalData: [], filteredEvents: [] });
+      }
+    } catch (error) {
+      console.error("축제 데이터를 가져오는 중 오류 발생:", error.message);
+      set({ festivalData: [], filteredEvents: [] });
+    } finally {
+      set({ isLoading: false });
+    }
+  },
 }));
