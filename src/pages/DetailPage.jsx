@@ -1,12 +1,14 @@
 import { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { useFestivalStore } from "../store/festivalStore";
+import styled from "styled-components";
+import EventDetailThumb from "../components/EventDetailThumb";
+import EventDetailBox from "../components/EventDetailBox";
 
 const DetailPage = () => {
   const { id } = useParams();
   const { festivalData, fetchFestivalData } = useFestivalStore();
 
-  // 데이터가 없으면 fetch 요청
   useEffect(() => {
     if (!festivalData) {
       fetchFestivalData("축제", 1, 10);
@@ -17,16 +19,23 @@ const DetailPage = () => {
     return <p>Loading data...</p>;
   }
 
-  const { DATE, MAIN_IMG, TITLE } = festivalData[id];
+  const data = festivalData[id];
 
   return (
-    <>
-      <p>{id}번 페이지</p>
-      <p>{DATE}</p>
-      <img src={MAIN_IMG} alt={TITLE} />
-      <p>{TITLE}</p>
-    </>
+    <DetailPageWrap>
+      <EventDetailThumb data={data} />
+      <EventDetailBox data={data} />
+    </DetailPageWrap>
   );
 };
+
+const DetailPageWrap = styled.div`
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-between;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 80px 50px;
+`;
 
 export default DetailPage;
