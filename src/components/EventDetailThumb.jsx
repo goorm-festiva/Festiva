@@ -1,15 +1,23 @@
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
+import { useNavigateToDetail } from "../hooks/useNavigateToDetail";
 
 const EventDetailThumb = ({ data }) => {
-  const { MAIN_IMG } = data;
+  const navigate = useNavigateToDetail();
+
+  const { MAIN_IMG, ORG_LINK } = data;
   return (
     <EventDetailThumbWrap>
       <ImgBox>
         <img src={MAIN_IMG} alt="축제 이미지" />
       </ImgBox>
       <BtnBox>
-        <HomePageBtn>홈페이지 바로가기</HomePageBtn>
-        <ReservationBtn>바로 예매하기</ReservationBtn>
+        <HomePageBtn as="a" href={ORG_LINK} target="_blank">
+          홈페이지 바로가기
+        </HomePageBtn>
+        <ReservationBtn onClick={() => navigate("../reservation")}>
+          바로 예매하기
+        </ReservationBtn>
       </BtnBox>
     </EventDetailThumbWrap>
   );
@@ -71,6 +79,7 @@ export const HomePageBtn = styled(ReservationBtn)`
   border: 2px solid #000;
   color: #000;
   padding: 18px 0;
+  text-decoration: none;
 
   &:hover {
     background-color: #000;
