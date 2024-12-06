@@ -1,15 +1,10 @@
 import styled from "styled-components";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Pagination, Autoplay } from "swiper/modules";
-import { useNavigate } from "react-router-dom";
+import { useNavigateToDetail } from "../hooks/useNavigateToDetail";
 
 const StyledSwiper = ({ swiperData, activeEventInfo }) => {
-  const navigate = useNavigate();
-
-  const moveToDetailPage = (id) => {
-    navigate(`/detail/${id}`, { state: swiperData[id] });
-    window.scrollTo({ top: 0, left: 0 });
-  };
+  const moveToDetailPage = useNavigateToDetail();
 
   return (
     <>
