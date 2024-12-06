@@ -6,20 +6,15 @@ import * as Main from "./MainEvent";
 import * as Con from "./MainEventItem";
 import * as Feature from "./FeaturedEvent";
 import * as M from "./MainEventItem";
-import { useNavigate } from "react-router-dom";
+import { useNavigateToDetail } from "../hooks/useNavigateToDetail";
 
 const EventList = ({ lastEventElementRef }) => {
   const { filteredEvents } = useFestivalStore();
-  const navigate = useNavigate(); // useNavigate 훅 사용
+  const moveToDetailPage = useNavigateToDetail();
 
   if (!filteredEvents || filteredEvents.length === 0) {
     return <p style={{ padding: "0px 50px" }}>등록된 이벤트가 없습니다.</p>;
   }
-
-  const moveToDetailPage = (event, index) => {
-    navigate(`/detail/${index}`, { state: event });
-    window.scrollTo({ top: 0, left: 0 });
-  };
 
   return (
     <CustomStyledM>
@@ -32,7 +27,7 @@ const EventList = ({ lastEventElementRef }) => {
             <h2>{event.TITLE}</h2>
             <p>{event.DATE}</p>
           </ContentBox>
-          <ImgBox onClick={() => moveToDetailPage(event, index)}>
+          <ImgBox onClick={() => moveToDetailPage(index)}>
             {event.MAIN_IMG && <img src={event.MAIN_IMG} alt={event.TITLE} />}
           </ImgBox>
         </View>
