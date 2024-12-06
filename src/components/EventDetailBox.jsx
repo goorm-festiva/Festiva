@@ -2,8 +2,11 @@ import styled from "styled-components";
 import { FaRegHeart } from "react-icons/fa";
 import dateFormatter from "../util/dateFormatter";
 import { HomePageBtn } from "./EventDetailThumb";
+import { useNavigatePage } from "../hooks/useNavigatePage";
 
 const EventDetailBox = ({ data }) => {
+  const navigate = useNavigatePage();
+
   const moreInfo = {
     "주최 기관": data.ORG_NAME,
     이용대상: data.USE_TRGT,
@@ -54,7 +57,9 @@ const EventDetailBox = ({ data }) => {
           </MoreInfoItem>
         ))}
       </MoreInfo>
-      <HomePageBtn>목록으로 가기</HomePageBtn>
+      <HomePageBtn onClick={() => navigate("/AllEvent")}>
+        목록으로 가기
+      </HomePageBtn>
     </EventDetailBoxWrap>
   );
 };
