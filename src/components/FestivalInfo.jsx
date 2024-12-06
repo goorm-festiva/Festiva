@@ -1,7 +1,7 @@
 import styled from "styled-components";
-import { useNavigate } from "react-router-dom";
 import { PiArrowUpRightThin } from "react-icons/pi";
 import dateFormatter from "../util/dateFormatter";
+import { useNavigateToDetail } from "../hooks/useNavigateToDetail";
 
 const titleFormatter = (title) => {
   const index = title.indexOf("]");
@@ -9,12 +9,7 @@ const titleFormatter = (title) => {
 };
 
 const FestivalInfo = ({ info, index }) => {
-  const navigate = useNavigate();
-
-  const moveToDetailPage = (id) => {
-    navigate(`/detail/${id}`, { state: info });
-    window.scrollTo({ top: 0, left: 0 });
-  };
+  const moveToDetailPage = useNavigateToDetail();
 
   return (
     <InfoWrap>
@@ -27,11 +22,7 @@ const FestivalInfo = ({ info, index }) => {
         <p>{info.PLACE}</p>
       </div>
       <MoveDetail>
-        <PiArrowUpRightThin
-          onClick={() => {
-            moveToDetailPage(index);
-          }}
-        />
+        <PiArrowUpRightThin onClick={() => moveToDetailPage(index)} />
       </MoveDetail>
     </InfoWrap>
   );
