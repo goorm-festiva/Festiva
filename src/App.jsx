@@ -3,6 +3,9 @@ import GlobalStyles from "./Styles/GlobalStyles";
 import Home from "./pages/Home";
 import AllEvent from "./pages/AllEvent";
 import LoginPage from "./pages/LoginPage";
+import DetailPage from "./pages/DetailPage";
+import ReservationPage from "./pages/ReservationPage";
+import Layout from "./components/Layout";
 
 // 추가
 import SignupPage from "./pages/SignupPage";
@@ -11,7 +14,6 @@ import { useEffect, useState } from "react";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 
 function App() {
-  // 추가
   // 현재 사용자 상태 저장
   const [user, setUser] = useState(null);
 
@@ -26,28 +28,17 @@ function App() {
   return (
     <>
       <GlobalStyles />
-      {/* Layout에 user를 전달, 추가 */}
+      {/* Layout에 user를 전달 */}
       <Routes>
-<<<<<<< Updated upstream
-        <Route path="/" element={<Home />} />
-<<<<<<< HEAD
-=======
         <Route element={<Layout user={user} />}>
           <Route path="/" element={<Home />} />
           <Route path="/AllEvent" element={<AllEvent />} />
           <Route path="/login" element={<LoginPage />} />
           <Route path="/detail/:id" element={<DetailPage />} />
           <Route path="/reservation" element={<ReservationPage />} />
-
-          // 추가
           <Route path="/signup" element={<SignupPage />} />
           <Route path="/mypage" element={<MyPage />} />
-          </Route>
->>>>>>> Stashed changes
-=======
-        <Route path="/AllEvent" element={<AllEvent />} />
-        <Route path="/login" element={<LoginPage />} />
->>>>>>> 8fb797457ca5440b4df20c1b316982b6522e5551
+        </Route>
       </Routes>
     </>
   );
