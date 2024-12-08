@@ -11,7 +11,7 @@ const SearchBar = () => {
 
   const handleSearch = () => {
     if (inputValue.trim()) {
-      navigate("/", { state: { inputValue } });
+      navigate("/AllEvent", { state: { inputValue } });
     }
   };
 

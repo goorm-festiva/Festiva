@@ -1,6 +1,8 @@
 import { Route, Routes } from "react-router-dom";
 import GlobalStyles from "./Styles/GlobalStyles";
 import Home from "./pages/Home";
+import AllEvent from "./pages/AllEvent";
+import LoginPage from "./pages/LoginPage";
 
 // 추가
 import SignupPage from "./pages/SignupPage";
@@ -28,6 +30,7 @@ function App() {
       <Routes>
 <<<<<<< Updated upstream
         <Route path="/" element={<Home />} />
+<<<<<<< HEAD
 =======
         <Route element={<Layout user={user} />}>
           <Route path="/" element={<Home />} />
@@ -41,6 +44,10 @@ function App() {
           <Route path="/mypage" element={<MyPage />} />
           </Route>
 >>>>>>> Stashed changes
+=======
+        <Route path="/AllEvent" element={<AllEvent />} />
+        <Route path="/login" element={<LoginPage />} />
+>>>>>>> 8fb797457ca5440b4df20c1b316982b6522e5551
       </Routes>
     </>
   );

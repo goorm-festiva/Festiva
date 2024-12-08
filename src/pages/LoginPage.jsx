@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom"; // useNavigate 가져오기
 // Firebase 인증 함수 import
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
-import app from "./firebase"; // Firebase 초기화 파일 import
+import app from "../firebase"; // Firebase 초기화 파일 import
 // Styled-Components import , 설치 : npm install styled-components
 import styled from "styled-components";
 // import analytics from "./firebase";
@@ -128,7 +128,11 @@ const LoginPage = () => {
 
     try {
       // Firebase를 통해 이메일과 비밀번호로 로그인 요청
-      const userCredential = await signInWithEmailAndPassword(auth, email, password);
+      const userCredential = await signInWithEmailAndPassword(
+        auth,
+        email,
+        password
+      );
       // 성공적으로 로그인된 사용자 출력
       console.log("Logged in user:", userCredential.user);
       // 로그인 성공 상태로 업데이트
@@ -157,7 +161,7 @@ const LoginPage = () => {
       {error && <Error>{error}</Error>}
       {success && <Success>로그인 성공🥳</Success>}
 
-      <Input 
+      <Input
         type="email"
         placeholder="이메일을 입력하세요."
         value={email}
@@ -172,9 +176,7 @@ const LoginPage = () => {
         onChange={(e) => setPassword(e.target.value)}
       />
 
-      <Button onClick={handleLogin}>
-        로그인
-      </Button>
+      <Button onClick={handleLogin}>로그인</Button>
     </Container>
   );
 };

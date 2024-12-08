@@ -82,11 +82,17 @@ const Header = styled.header`
   width: 100%;
   height: 50px;
   background-color: black;
+  color: white;
+`;
+
+const NavWrap = styled.div`
+  width: clamp(910px, 100%, 1400px);
+  height: 100%;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  color: white;
-  padding: 0 3rem;
+  padding: 0 50px;
+  margin: 0 auto;
 `;
 
 const NavDiv = styled.div`
