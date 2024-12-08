@@ -140,9 +140,9 @@ const LoginPage = () => {
       // 에러 메시지 초기화
       setError("");
 
-      // 2초 동안 성공 메시지 보여준 후 메인 페이지로 이동하기
+      // 성공 메시지 보여준 후 2초 뒤에 홈페이지로 이동하기
       setTimeout(() => {
-        navigate("/main");
+        navigate("/");
       }, 2000);
     } catch (err) {
       // 에러 메시지 콘솔에 출력
