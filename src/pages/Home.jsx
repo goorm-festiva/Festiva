@@ -24,7 +24,7 @@ const Home = () => {
 
   return (
     <>
-      <Nav></Nav>
+      {/* <Nav></Nav> */}
       <Carousel></Carousel>
       <MainEvent />
     </>

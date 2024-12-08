@@ -61,7 +61,7 @@ const AllEvent = () => {
 
   return (
     <>
-      <Nav />
+      {/* <Nav /> */}
       <Head>
         <AllEventNav />
         <h1>축제 일정</h1>
