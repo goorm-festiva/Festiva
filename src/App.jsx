@@ -3,8 +3,8 @@ import GlobalStyles from "./Styles/GlobalStyles";
 import Home from "./pages/Home";
 import AllEvent from "./pages/AllEvent";
 import LoginPage from "./pages/LoginPage";
-// import DetailPage from "./pages/DetailPage";
-// import ReservationPage from "./pages/ReservationPage";
+import DetailPage from "./pages/DetailPage";
+import ReservationPage from "./pages/ReservationPage";
 import Layout from "./components/Layout";
 
 import SignupPage from "./pages/SignupPage";
@@ -14,6 +14,7 @@ import { getAuth, onAuthStateChanged } from "firebase/auth";
 
 // 추가
 import ProtectedRoute from "./components/ProtectedRoute";
+
 
 function App() {
   // 현재 사용자 상태 저장
@@ -50,10 +51,9 @@ function App() {
             }
           />
 
-          {/* <Route path="/detail/:id" element={<DetailPage />} /> */}
-          {/* <Route path="/reservation" element={<ReservationPage />} /> */}
-          
-          {/* <Route path="/mypage" element={<MyPage />} /> */}
+          <Route path="/detail/:id" element={<DetailPage />} />
+          <Route path="/reservation" element={<ReservationPage />} />
+ 
         </Route>
       </Routes>
     </>

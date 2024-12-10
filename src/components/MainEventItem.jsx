@@ -1,11 +1,13 @@
 import styled from "styled-components";
 import dateFormatter from "../util/dateFormatter";
+import { useNavigateToDetail } from "../hooks/useNavigateToDetail";
 
-const MainEventItem = ({ data }) => {
+const MainEventItem = ({ data, id }) => {
   const { CODENAME, DATE, TITLE, MAIN_IMG } = data;
+  const moveToDetailPage = useNavigateToDetail();
 
   return (
-    <EventCard>
+    <EventCard onClick={() => moveToDetailPage(id)}>
       <ImgBox>
         <img src={MAIN_IMG} />
       </ImgBox>

@@ -11,7 +11,7 @@ const MainEvent = () => {
     <Container>
       <FeaturedEvent firstData={firstData} />
       {remainingData.map((data, index) => (
-        <MainEventItem key={index} data={data} />
+        <MainEventItem key={index} data={data} id={index + 1} />
       ))}
     </Container>
   );

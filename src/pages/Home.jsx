@@ -2,7 +2,6 @@ import { useFestivalStore } from "../store/festivalStore";
 import { useEffect, useRef } from "react";
 import Carousel from "../components/Carousel";
 import MainEvent from "../components/MainEvent";
-import Nav from "../components/Nav";
 
 const Home = () => {
   const { isLoading, fetchFestivalData, festivalData } = useFestivalStore();
@@ -24,7 +23,6 @@ const Home = () => {
 
   return (
     <>
-      {/* <Nav></Nav> */}
       <Carousel></Carousel>
       <MainEvent />
     </>
