@@ -3,7 +3,31 @@ import SearchBar from "./SearchBar";
 import { FaUserCircle } from "react-icons/fa";
 import { Link } from "react-router-dom";
 
-const Nav = () => {
+// 추가
+import { getAuth } from "firebase/auth"; // Firebase 인증 가져오기
+import { useNavigate } from "react-router-dom"; // useNavigate 추가
+
+
+// 추가
+// user props 받기
+const Nav = ({ user }) => {
+  // 추가
+  const auth = getAuth(); // Firebase 인증 객체
+  const navigate = useNavigate(); // 리다이렉트를 위한 useNavigate 훅
+
+  // 로그아웃 함수
+  const handleLogout = () => {
+    auth.signOut()
+      .then(() => {
+        alert("로그아웃되었습니다!"); // 알림 메시지
+        navigate("/login"); // 로그인 페이지로 리다이렉트
+      })
+      .catch((error) => {
+        console.error("로그아웃 실패:", error);
+        alert("로그아웃에 실패했습니다. 다시 시도해주세요."); // 에러 메시지
+      });
+  };
+
   return (
     <Header>
       <NavWrap>
@@ -15,14 +39,44 @@ const Nav = () => {
         </NavDiv>
         <IconDiv>
           <SearchBar />
-          <LinkItem to={"/login"}>
+          {/* <LinkItem to={"/login"}>
             <FaUserCircle size="24" />
-          </LinkItem>
+          </LinkItem> */}
+          {/* 추가 */}
+          {user ? ( // user가 존재하면 로그아웃 버튼 표시
+            <>
+              <LinkItem to={"/profile"}>
+                <FaUserCircle size="24" />
+              </LinkItem>
+              <LogoutButton onClick={handleLogout}>로그아웃</LogoutButton>
+            </>
+          ) : (
+            <LinkItem to={"/login"}>
+              <FaUserCircle size="24" />
+            </LinkItem>
+          )}
         </IconDiv>
       </NavWrap>
     </Header>
   );
 };
+
+
+// 로그아웃 버튼 추가
+const LogoutButton = styled.button`
+  background-color: red;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 5px 10px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+
+  &:hover {
+    background-color: darkred;
+  }
+`;
 
 const Header = styled.header`
   width: 100%;
