@@ -1,8 +1,11 @@
 import styled from "styled-components";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Pagination, Autoplay } from "swiper/modules";
+import { useNavigateToDetail } from "../hooks/useNavigateToDetail";
 
 const StyledSwiper = ({ swiperData, activeEventInfo }) => {
+  const moveToDetailPage = useNavigateToDetail();
+
   return (
     <>
       <SwiperContainer
@@ -23,7 +26,11 @@ const StyledSwiper = ({ swiperData, activeEventInfo }) => {
       >
         {swiperData.map(({ MAIN_IMG, TITLE }, index) => (
           <SwiperSlide key={index}>
-            <img src={MAIN_IMG} alt={TITLE} />
+            <img
+              src={MAIN_IMG}
+              alt={TITLE}
+              onClick={() => moveToDetailPage(index)}
+            />
           </SwiperSlide>
         ))}
       </SwiperContainer>
@@ -38,6 +45,8 @@ const SwiperContainer = styled(Swiper)`
   aspect-ratio: 1 / 1;
   position: relative;
   margin-right: 0;
+  cursor: pointer;
+
   .swiper-slide img {
     display: block;
     width: 100%;

@@ -2,8 +2,11 @@ import { IoIosCalendar } from "react-icons/io";
 import { RxArrowTopRight } from "react-icons/rx";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
+import { useNavigateToDetail } from "../hooks/useNavigateToDetail";
 
 const FeaturedEvent = ({ firstData }) => {
+  const moveToDetailPage = useNavigateToDetail();
+
   if (!firstData) {
     return <div>데이터가 없습니다.</div>;
   }
@@ -23,7 +26,7 @@ const FeaturedEvent = ({ firstData }) => {
             </p>
           </ViewAllEvent>
         </InfoBox>
-        <ImgBox>
+        <ImgBox onClick={() => moveToDetailPage("0")}>
           <AdBadge>
             <p>AD</p>
           </AdBadge>
@@ -79,6 +82,7 @@ export const ImgBox = styled.div`
   border: 2px solid #000;
   margin: -2px -2px 0px 0px;
   position: relative;
+  cursor: pointer;
 
   img {
     width: 100%;

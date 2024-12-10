@@ -1,28 +1,32 @@
 import styled from "styled-components";
-import { Link } from "react-router-dom";
 import { PiArrowUpRightThin } from "react-icons/pi";
 import dateFormatter from "../util/dateFormatter";
+import { useNavigateToDetail } from "../hooks/useNavigateToDetail";
 
 const titleFormatter = (title) => {
   const index = title.indexOf("]");
   return title.slice(index + 1);
 };
 
-const FestivalInfo = ({ info }) => (
-  <InfoWrap>
-    <div>
-      <span>What's On</span>
-      <h1>{titleFormatter(info.TITLE)}</h1>
-    </div>
-    <div>
-      <p>{dateFormatter(info.DATE)}</p>
-      <p>{info.PLACE}</p>
-    </div>
-    <LinkDetail to="">
-      <PiArrowUpRightThin />
-    </LinkDetail>
-  </InfoWrap>
-);
+const FestivalInfo = ({ info, index }) => {
+  const moveToDetailPage = useNavigateToDetail();
+
+  return (
+    <InfoWrap>
+      <div>
+        <span>What's On</span>
+        <h1>{titleFormatter(info.TITLE)}</h1>
+      </div>
+      <div>
+        <p>{dateFormatter(info.DATE)}</p>
+        <p>{info.PLACE}</p>
+      </div>
+      <MoveDetail>
+        <PiArrowUpRightThin onClick={() => moveToDetailPage(index)} />
+      </MoveDetail>
+    </InfoWrap>
+  );
+};
 
 const InfoWrap = styled.div`
   width: 55.5%;
@@ -54,12 +58,15 @@ const InfoWrap = styled.div`
   }
 `;
 
-const LinkDetail = styled(Link)`
+const MoveDetail = styled.div`
   position: absolute;
-  bottom: -110px;
+  bottom: -60px;
   right: -90px;
-  color: #000;
-  font-size: clamp(160px, 20vw, 220px);
+  svg {
+    color: #000;
+    font-size: clamp(160px, 20vw, 240px);
+    cursor: pointer;
+  }
 `;
 
 export default FestivalInfo;

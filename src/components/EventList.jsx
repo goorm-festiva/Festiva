@@ -6,9 +6,11 @@ import * as Main from "./MainEvent";
 import * as Con from "./MainEventItem";
 import * as Feature from "./FeaturedEvent";
 import * as M from "./MainEventItem";
+import { useNavigateToDetail } from "../hooks/useNavigateToDetail";
 
-const EventList = () => {
-  const { filteredEvents } = useFestivalStore(); // Zustand 스토어에서 필터링된 이벤트 가져오기
+const EventList = ({ lastEventElementRef }) => {
+  const { filteredEvents } = useFestivalStore();
+  const moveToDetailPage = useNavigateToDetail();
 
   if (!filteredEvents || filteredEvents.length === 0) {
     return <p style={{ padding: "0px 50px" }}>등록된 이벤트가 없습니다.</p>;
@@ -17,12 +19,15 @@ const EventList = () => {
   return (
     <CustomStyledM>
       {filteredEvents.map((event, index) => (
-        <View key={index}>
+        <View
+          key={event.ID || index}
+          ref={index === filteredEvents.length - 1 ? lastEventElementRef : null}
+        >
           <ContentBox>
             <h2>{event.TITLE}</h2>
             <p>{event.DATE}</p>
           </ContentBox>
-          <ImgBox>
+          <ImgBox onClick={() => moveToDetailPage(index)}>
             {event.MAIN_IMG && <img src={event.MAIN_IMG} alt={event.TITLE} />}
           </ImgBox>
         </View>
