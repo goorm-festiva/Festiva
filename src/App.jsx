@@ -1,35 +1,63 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { Route, Routes } from "react-router-dom";
+import GlobalStyles from "./Styles/GlobalStyles";
+import Home from "./pages/Home";
+import AllEvent from "./pages/AllEvent";
+import LoginPage from "./pages/LoginPage";
+import DetailPage from "./pages/DetailPage";
+import ReservationPage from "./pages/ReservationPage";
+import Layout from "./components/Layout";
+
+import SignupPage from "./pages/SignupPage";
+import MyPage from "./pages/MyPage";
+import { useEffect, useState } from "react";
+import { getAuth, onAuthStateChanged } from "firebase/auth";
+
+// 추가
+import ProtectedRoute from "./components/ProtectedRoute";
+
 
 function App() {
-  const [count, setCount] = useState(0)
+  // 현재 사용자 상태 저장
+  const [user, setUser] = useState(null);
+
+  useEffect(() => {
+    const auth = getAuth();
+    const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
+      console.log(currentUser); // 사용자 정보를 로그로 확인
+      setUser(currentUser); // Firebase로부터 현재 사용자 정보 설정
+    });
+    return () => unsubscribe(); // 컴포넌트가 언마운트되면 구독 해제
+  }, []);
 
   return (
     <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
+      <GlobalStyles />
+      {/* Layout에 user를 전달 */}
+      <Routes>
+        <Route element={<Layout user={user} />}>
+          {/* 비로그인 사용자가 접근 가능한 페이지 */}
+          <Route path="/" element={<Home />} />
+          <Route path="/AllEvent" element={<AllEvent />} />
+          <Route path="/login" element={<LoginPage />} />
+          <Route path="/signup" element={<SignupPage />} />
+
+          {/* 로그인 사용자만 접근 가능한 페이지 */}
+          <Route
+            path="/mypage"
+            element={
+              <ProtectedRoute user={user}>
+                <MyPage />
+              </ProtectedRoute>
+            }
+          />
+
+          <Route path="/detail/:id" element={<DetailPage />} />
+          <Route path="/reservation" element={<ReservationPage />} />
+ 
+        </Route>
+      </Routes>
     </>
-  )
+  );
 }
 
-export default App
+export default App;
